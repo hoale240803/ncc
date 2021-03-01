@@ -1,1 +1,9 @@
-# ncc
+### MERN
+
+## Mongo
+## NODEJS
+## REACTJS
+
+## REFERENCE
+## SNIPPETS
+## DOCS
