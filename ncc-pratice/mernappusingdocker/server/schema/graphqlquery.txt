@@ -1,0 +1,19 @@
+
+
+#### ADD car with owners
+mutation {
+  addCar(name: "daf", model: 2, company: "tytytyty", ownerId: "603e12caeca8d04658d48b15") {
+    name
+    model
+    company
+  }
+}
+
+### ADD OWNER
+mutation {
+  addCar(name: "daf", model: 2, company: "tytytyty", ownerId: "603e12caeca8d04658d48b15") {
+    name
+    model
+    company
+  }
+}

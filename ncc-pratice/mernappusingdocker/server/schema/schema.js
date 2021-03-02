@@ -2,6 +2,9 @@
 const graphql = require("graphql");
 const _ = require("lodash");
 
+const cars = require("../models/car");
+const owners = require("../models/owner");
+
 /*Getting GraphQLObjectType function from 'graphql' to define the (dataType) 
  structure of our queries and their model type.
 */
@@ -66,7 +69,7 @@ const CarType = new GraphQLObjectType({
       //Supporting pwner query in carType
       type: OwnerType,
       resolve(parent, args) {
-        return _.find(OwnersArray, { id: parent.ownerId });
+        return owners.findById(parent.ownerId);
       },
     }, //owner
   }),
@@ -83,12 +86,53 @@ const OwnerType = new GraphQLObjectType({
       // Supporting list of cars query in Owner type
       type: new GraphQLList(CarType),
       resolve(parent, args) {
-        return _.filter(CarsArray, { ownerId: parent.id });
+        return cars.find({ ownerId: parent.id });
       },
     },
   }),
 });
+const Mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    addOwner: {
+      type: OwnerType,
+      args: {
+        name: {
+          type: GraphQLString,
+        },
+        age: { type: GraphQLInt },
+        gender: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        let owner = new owners({
+          name: args.name,
+          age: args.age,
+          gender: args.gender,
+        });
+        return owner.save();
+      },
+    },
+    addCar: {
+      type: CarType,
+      args: {
+        name: { type: GraphQLString },
+        model: { type: GraphQLInt },
+        company: { type: GraphQLString },
+        ownerId: { type: GraphQLID },
+      },
+      resolve(parent, args) {
+        let car = new cars({
+          name: args.name,
+          model: args.model,
+          company: args.company,
+          ownerId: args.ownerId,
+        });
 
+        return car.save();
+      },
+    }, //addCar
+  }, //fields ends here
+});
 //Defining RootQuery
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -104,31 +148,31 @@ const RootQuery = new GraphQLObjectType({
          * With the help of lodash library(_), we are trying to find car with id from 'CarsArray'
          * and returning its required data to calling tool.
          */
-        return _.find(CarsArray, { id: args.id });
+        return cars.findById(args.id);
       }, //resolve function
     }, //car query ends here
     owner: {
       type: OwnerType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return _.find(OwnersArray, { id: args.id });
+        return owners.findById(args.id);
       },
     },
     // return list cars
     cars: {
       type: new GraphQLList(CarType),
       resolve(parent, args) {
-        return CarsArray;
+        return cars.find({});
       },
     },
     owners: {
       type: new GraphQLList(OwnerType),
       resolve(parent, args) {
-        return OwnersArray;
+        return owners.find({});
       },
     },
   }, //fields end here
 }); //resolve function
 
 //exporting 'GraphQLSchema with RootQuery' for GraphqlHTTP middleware.
-module.exports = new GraphQLSchema({ query: RootQuery });
+module.exports = new GraphQLSchema({ query: RootQuery, mutation: Mutation });

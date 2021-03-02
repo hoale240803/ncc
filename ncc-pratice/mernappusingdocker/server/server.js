@@ -2,11 +2,24 @@
 const express = require("express");
 const graphqlHTTP = require("express-graphql").graphqlHTTP;
 
+const mongoose = require("mongoose"); //using mongoose to connect with db
 //Imports
 const schema = require("./schema/schema");
 
 //Making const of express() into a variable (JS function first class Object).
 const app = express();
+
+//Please change mongoDB connection as maybe I have deleted this db on mlab when you are using it.
+
+mongoose.connect(
+  "mongodb://localhost:27017/CarsManagement",
+  { useNewUrlParser: true },
+  (err, db) => {
+    if (err) throw err;
+    console.log("Connect with DB successfully.");
+    console.log("Database created!");
+  }
+);
 /*We can use graphql on express server with middlewares, so that whenever
 we need graphql query from frontend, our express server can handle it
 smoothly.
