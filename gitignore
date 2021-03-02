@@ -1,0 +1,9 @@
+#ignore node_modules
+
+
+
+
+#ignore 
+.vscode/
+mernappusingdocker/node_modules
+mernappusingdocker/package-lock.json
