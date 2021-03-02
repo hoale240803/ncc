@@ -1,9 +1,9 @@
-#ignore node_modules
 
 
 
 
 #ignore 
-.vscode/
-mernappusingdocker/node_modules
-mernappusingdocker/package-lock.json
+/ncc-pratice/.vscode
+#ignore node_modules
+/ncc-pratice/mernappusingdocker/node_modules
+/ncc-pratice/mernappusingdocker/package-lock.json
