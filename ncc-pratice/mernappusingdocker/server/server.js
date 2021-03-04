@@ -2,6 +2,9 @@
 const express = require("express");
 const graphqlHTTP = require("express-graphql").graphqlHTTP;
 
+// avoid cors policy
+const cors = require("cors");
+
 const mongoose = require("mongoose"); //using mongoose to connect with db
 //Imports
 const schema = require("./schema/schema");
@@ -20,12 +23,17 @@ mongoose.connect(
     console.log("Database created!");
   }
 );
+/**
+ * Cors added as middleware
+ */
+app.use(cors());
 /*We can use graphql on express server with middlewares, so that whenever
 we need graphql query from frontend, our express server can handle it
 smoothly.
     graphqlHTTP method let us do what we want to do if we have captured 
 '/graphql' middleware.
 */
+
 app.use(
   "/graphql",
   graphqlHTTP({

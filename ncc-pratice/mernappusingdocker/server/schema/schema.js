@@ -69,6 +69,7 @@ const CarType = new GraphQLObjectType({
       //Supporting pwner query in carType
       type: OwnerType,
       resolve(parent, args) {
+        // parent lấy từ lúc gọi object car
         return owners.findById(parent.ownerId);
       },
     }, //owner

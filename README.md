@@ -14,7 +14,7 @@
 
 - Git
   [(Link intergrated-terminal)](https://code.visualstudio.com/docs/editor/integrated-terminal)
-- Emmet
+- Emmet [(Link)](https://code.visualstudio.com/docs/editor/emmet)
 - Prettier (auto format on save)[Link](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - Auto Rename Tag [Link](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag)
 
