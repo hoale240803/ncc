@@ -46,4 +46,4 @@ const getCarQuery = gql`
     }
   }
 `;
-export { getCarsQuery, getOwnersQuery, AddCarMutation };
+export { getCarsQuery, getOwnersQuery, AddCarMutation, getCarQuery };
