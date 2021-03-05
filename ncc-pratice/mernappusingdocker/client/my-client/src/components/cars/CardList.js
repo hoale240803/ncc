@@ -12,7 +12,7 @@ const CarList = (props) => {
     if (data.loading) {
       return <div>Loading Cars...</div>;
     } else {
-      return data.cars.map((car) => {
+      return data.cars?.map((car) => {
         return (
           <li key={car.id} onClick={(e) => setCar({ Id: car.id })}>
             {car.name}

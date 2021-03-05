@@ -31,7 +31,7 @@ const AddCar = (props) => {
     if (data.loading) {
       return <option disabled>Owner loading...</option>;
     } else {
-      return data.owners.map((owner) => {
+      return data.owners?.map((owner) => {
         return (
           <option key={owner.id} value={owner.id}>
             {owner.name}
