@@ -1,29 +1,33 @@
 import React from "react";
-import { getCarsQuery } from "../../queries/queries";
 import { graphql } from "react-apollo";
+import { getCarsQuery } from "../../queries/queries";
+import CarDetails from "./CarDetails";
 
-const CardList = (props) => {
-  console.log("list cars", props); //check in the browser to see this values.
+const CarList = (props) => {
+  console.log(props);
+  const [Id, setCar] = React.useState(0);
 
   const displayCars = () => {
-    if (props.data.loading) {
-      return <div>Loading.....</div>;
+    var data = props.data;
+    if (data.loading) {
+      return <div>Loading Cars...</div>;
     } else {
-      return props.data.cars.map((cars) => {
-        return <div key={cars.id}>{cars.name}</div>;
+      return data.cars?.map((car) => {
+        return (
+          <li key={car.id} onClick={(e) => setCar({ Id: car.id })}>
+            {car.name}
+          </li>
+        );
       });
     }
   };
+
   return (
-    <div>
-      <>
-        <ul id="carList">
-          <li>CarName</li>
-          <li>{displayCars()}</li>
-        </ul>
-      </>
-    </div>
+    <>
+      <ul id="carList">{displayCars()}</ul>
+      <CarDetails carId={Id}></CarDetails>
+    </>
   );
 };
 
-export default graphql(getCarsQuery)(CardList); //HOC
+export default graphql(getCarsQuery)(CarList);
