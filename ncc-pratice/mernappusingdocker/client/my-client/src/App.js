@@ -16,10 +16,10 @@ function App() {
       <div className="App">
         <DemoUseRef />
         <CheckOutForm />
-        {/* <h1>List of Cards</h1>
+        <h1>List of Cards</h1>
         <CardList></CardList>
         <h1>Add Car</h1>
-        <AddCar /> */}
+        <AddCar />
       </div>
     </ApolloProvider>
   );
